@@ -1,9 +1,10 @@
 import "./App.css";
+import StoryList from "./components/StoryList/StoryList";
 
 const App = () => {
   return (
     <>
-      <h1 className="text-3xl font-bold text-black underline">Hello world!</h1>
+      <StoryList />
     </>
   );
 };
