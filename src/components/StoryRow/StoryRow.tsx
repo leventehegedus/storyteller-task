@@ -31,14 +31,14 @@ const StoryRow: React.FC<{ story: Story }> = ({ story }) => {
       </td>
       <td className="py-4 px-4 text-sm">{story.lastModified}</td>
       <td className="py-4 px-4">
-        <StatusBadge status={story.status} />
+        <StatusBadge variant={story.status} />
       </td>
       <td className="py-4 px-4 text-sm">{story.liveFrom || "-"}</td>
       <td className="py-4 px-4 text-sm">{story.ends || "-"}</td>
       <td className="py-4 px-4">
         <div className="flex gap-2">
-          <button className="p-1 text-gray-500 hover:text-gray-700">
-            <span className="sr-only">Edit story</span>
+          <button className="p-1 bg-green rounded-sm">
+            <span>Edit story</span>
             Edit
           </button>
         </div>

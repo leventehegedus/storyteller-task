@@ -15,6 +15,30 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Base Colors */
+  --white: #ffffff;
+  --off-white: #f9f9f9;
+
+  /* Dark Shades */
+  --dark-primary: #171a25;
+  --dark-secondary: #292f48;
+
+  /* Blues */
+  --blue-light: #76a0f0;
+  --blue-primary: #1c62eb;
+  --blue-dark: #103b8e;
+  --blue-action: #3161e3;
+
+  /* Accent Colors */
+  --green: #1db56c;
+  --red: #d24747;
+
+  /* Grays */
+  --gray-light: #bbbcc2;
+  --gray: #a3a3a3;
+
+  --radius-sm: 3px;
 }
 
 a {

@@ -1,3 +1,9 @@
+enum Status {
+  Draft = "draft",
+  Scheduled = "scheduled",
+  Live = "live",
+  Past = "past",
+}
 // Types
 export interface Story {
   id: string;
@@ -5,7 +11,7 @@ export interface Story {
   subtitle?: string;
   pages: string[];
   lastModified: string;
-  status: "draft" | "scheduled" | "live" | "past";
+  status: Status;
   liveFrom?: string;
   ends?: string;
 }
