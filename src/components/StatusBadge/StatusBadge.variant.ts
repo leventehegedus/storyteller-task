@@ -2,7 +2,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
 export const storyBadgeVariants = cva(
-  // Base styles
   "inline-flex items-center justify-center px-3 py-1 text-sm font-medium rounded-sm",
   {
     variants: {

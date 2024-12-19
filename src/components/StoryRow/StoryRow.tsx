@@ -1,4 +1,5 @@
 import { Story } from "../../types/story";
+import Button from "../Button/Button";
 import StatusBadge from "../StatusBadge/StatusBadge";
 
 const StoryRow: React.FC<{ story: Story }> = ({ story }) => {
@@ -36,12 +37,7 @@ const StoryRow: React.FC<{ story: Story }> = ({ story }) => {
       <td className="py-4 px-4 text-sm">{story.liveFrom || "-"}</td>
       <td className="py-4 px-4 text-sm">{story.ends || "-"}</td>
       <td className="py-4 px-4">
-        <div className="flex gap-2">
-          <button className="p-1 bg-green rounded-sm">
-            <span>Edit story</span>
-            Edit
-          </button>
-        </div>
+        <Button text="Edit" variant="green" />
       </td>
     </tr>
   );
