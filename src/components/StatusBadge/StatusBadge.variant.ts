@@ -2,24 +2,18 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
 export const storyBadgeVariants = cva(
-  "inline-flex items-center justify-center px-3 py-1 text-sm font-medium rounded-sm",
+  "inline-flex items-center justify-center px-[7px] py-0.5 text-xs font-bold rounded-sm text-white capitalize tracking-tighter",
   {
     variants: {
       variant: {
-        live: ["bg-green", "text-white"],
-        past: ["bg-gray-light", "text-dark-primary"],
-        scheduled: ["bg-blue-light", "text-white"],
-        draft: ["bg-gray-light", "text-dark-primary"],
-      },
-      size: {
-        default: "text-sm",
-        small: "text-xs",
-        large: "text-base",
+        live: ["bg-green"],
+        past: ["bg-gray"],
+        scheduled: ["bg-blue-primary"],
+        draft: ["bg-blue-primary"],
       },
     },
     defaultVariants: {
       variant: "live",
-      size: "default",
     },
   }
 );

@@ -31,6 +31,9 @@ export default {
         sm: "3px",
         md: "4px",
       },
+      fontSize: {
+        xs: ["11px", "14px"],
+      },
     },
   },
   plugins: [],
