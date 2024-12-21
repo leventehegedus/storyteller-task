@@ -4,11 +4,10 @@ import { cn } from "../../lib/utils";
 
 export const StoryBadge: React.FC<StoryBadgeProps> = ({
   variant,
-  size,
   className,
 }) => {
   return (
-    <span className={cn(storyBadgeVariants({ variant, size }), className)}>
+    <span className={cn(storyBadgeVariants({ variant }), className)}>
       {variant}
     </span>
   );

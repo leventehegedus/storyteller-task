@@ -28,7 +28,7 @@
   --blue-primary: #1c62eb;
   --blue-dark: #103b8e;
   --blue-action: #3161e3;
-
+  --blue-dark-active: #2a2f46;
   /* Accent Colors */
   --green: #1db56c;
   --red: #d24747;
@@ -42,18 +42,18 @@
 
 @font-face {
   font-family: "Euclid Circular B";
-  src: url("/assets/fonts/Euclid Circular B Regular.ttf") format("ttf"),
-    url("/assets/fonts/Euclid Circular B Regular.ttf") format("ttf");
+  src: url("/assets/fonts/Euclid Circular B Regular.ttf") format("truetype"),
+    url("/assets/fonts/Euclid Circular B Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Euclid Circular B";
-  src: url("/assets/fonts/Euclid Circular B Bold.ttf") format("ttf"),
-    url("/assets/fonts/Euclid Circular B Bold Bold.ttf") format("ttf");
+  src: url("/assets/fonts/Euclid Circular B Bold.ttf") format("truetype"),
+    url("/assets/fonts/Euclid Circular B Bold Bold.ttf") format("truetype");
   font-weight: 700;
-  font-style: normal;
+  font-style: bold;
 }
 
 * {
@@ -75,6 +75,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--dark-primary);
 }
 
 h1 {

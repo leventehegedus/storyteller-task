@@ -17,6 +17,7 @@ export default {
         "blue-primary": "#1C62EB",
         "blue-dark": "#103B8E",
         "blue-action": "#3161e3",
+        "blue-dark-active": "#2a2f46",
 
         // Accent
         green: "#1DB56C",
