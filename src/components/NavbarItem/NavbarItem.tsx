@@ -1,5 +1,4 @@
 import { MenuItem } from "../Navbar/Navbar";
-import NavbarItemDivider from "../NavbarItemDivider/NavbarItemDivider";
 import NavbarSubItem from "../NavbarSubItem/NavbarSubItem";
 
 interface MenuItemsProps {
@@ -16,11 +15,13 @@ const NavbarItem: React.FC<MenuItemsProps> = ({
   <ul className="py-5">
     {items.map((item) => (
       <>
-        <NavbarItemDivider />
         <NavbarSubItem
           key={item.name}
           {...item}
-          onClick={() => setActiveItem(item.name)}
+          onClick={() => {
+            setActiveItem(item.name);
+            console.log(`Active item: ${item.name}`);
+          }}
           activeItem={activeItem}
         />
       </>

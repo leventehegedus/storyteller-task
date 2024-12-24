@@ -9,8 +9,12 @@ const App = () => {
   return (
     <>
       <Header />
-      <Navbar />
-      <StoryList />
+      <div className="flex pr-[30px]">
+        <Navbar />
+        <div className="w-[calc(100%-228px)] overflow-x-auto">
+          <StoryList />
+        </div>
+      </div>
     </>
   );
 };

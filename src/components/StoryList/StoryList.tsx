@@ -33,7 +33,7 @@ const StoryList: React.FC = () => {
   }, [page, filters]);
 
   return (
-    <div className="bg-white rounded-lg p-6">
+    <div className="bg-off-white rounded-b-lg pb-[30px] w-full">
       <header className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold">Stories</h1>
         <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-2">
