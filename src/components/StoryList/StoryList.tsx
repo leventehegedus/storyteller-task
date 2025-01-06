@@ -34,66 +34,69 @@ const StoryList: React.FC = () => {
 
   return (
     <div className="bg-off-white rounded-b-lg pb-[30px] w-full">
-      <header className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold">Stories</h1>
-        <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-2">
-          <Plus size={16} />
-          New Story
-        </button>
+      <header className="flex justify-between items-center flex-wrap py-4 px-[30px] gap-4">
+        <h1 className="text-3xl font-semibold w-full tracking-[.01em]">
+          Stories
+        </h1>
+
+        <div className="flex gap-4 w-full">
+          <div className="relative flex-1">
+            <input
+              type="search"
+              placeholder="Search"
+              className="w-full pl-10 pr-4 py-2 border rounded-md h-9"
+              value={filters.search}
+              onChange={(e) =>
+                setFilters({ ...filters, search: e.target.value })
+              }
+            />
+            <Search
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              size={20}
+            />
+          </div>
+          <div className="relative w-48">
+            <select
+              className="w-full appearance-none bg-white border rounded-md px-4 py-2 pr-10 h-9"
+              value={filters.status}
+              onChange={(e) =>
+                setFilters({ ...filters, status: e.target.value })
+              }
+            >
+              <option>All Statuses</option>
+              <option>Draft</option>
+              <option>Scheduled</option>
+              <option>Live</option>
+              <option>Past</option>
+            </select>
+            <ChevronDown
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              size={20}
+            />
+          </div>
+          <button className="bg-green hover:bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-1 h-9 -tracking-[.01em]">
+            <Plus size={12} />
+            New Story
+          </button>
+        </div>
       </header>
 
-      <div className="flex gap-4 mb-6">
-        <div className="relative flex-1">
-          <Search
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-            size={20}
-          />
-          <input
-            type="search"
-            placeholder="Search"
-            className="w-full pl-10 pr-4 py-2 border rounded-md"
-            value={filters.search}
-            onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-          />
+      <div role="grid" className="w-full -mt-0.5">
+        <div className="border-b flex">
+          <div className="text-left py-3 px-4 flex-1">Title</div>
+          <div className="text-left py-3 px-4 flex-1">Pages</div>
+          <div className="text-left py-3 px-4 flex-1">Last Modified</div>
+          <div className="text-left py-3 px-4 flex-1">Status</div>
+          <div className="text-left py-3 px-4 flex-1">Live From</div>
+          <div className="text-left py-3 px-4 flex-1">Ends</div>
+          <div className="text-left py-3 px-4 flex-1">Actions</div>
         </div>
-        <div className="relative w-48">
-          <select
-            className="w-full appearance-none bg-white border rounded-md px-4 py-2 pr-10"
-            value={filters.status}
-            onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-          >
-            <option>All Statuses</option>
-            <option>Draft</option>
-            <option>Scheduled</option>
-            <option>Live</option>
-            <option>Past</option>
-          </select>
-          <ChevronDown
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-            size={20}
-          />
-        </div>
-      </div>
-
-      <table className="w-full" role="grid">
-        <thead>
-          <tr className="border-b">
-            <th className="text-left py-3 px-4">Title</th>
-            <th className="text-left py-3 px-4">Pages</th>
-            <th className="text-left py-3 px-4">Last Modified</th>
-            <th className="text-left py-3 px-4">Status</th>
-            <th className="text-left py-3 px-4">Live From</th>
-            <th className="text-left py-3 px-4">Ends</th>
-            <th className="text-left py-3 px-4">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
+        <div>
           {stories.map((story) => (
             <StoryRow key={story.id} story={story} />
           ))}
-        </tbody>
-      </table>
-
+        </div>
+      </div>
       <footer className="flex justify-between items-center mt-6">
         <div className="flex items-center gap-4">
           <span>Page 1 of 1</span>

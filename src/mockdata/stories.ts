@@ -30,7 +30,7 @@ export const mockStories: Story[] = [
   {
     id: "3",
     title: "Daily Horoscope",
-    subtitle: "(October 10)",
+    subtitle: "(October 16)",
     pages: [
       "/assets/images/fencer.png",
       "/assets/images/fencer.png",
@@ -47,8 +47,8 @@ export const mockStories: Story[] = [
   },
   {
     id: "4",
-    title: "Weekly Wallpapers",
-    subtitle: "(June 7)",
+    title: "Daily Horoscope",
+    subtitle: "(November 23)",
     pages: [
       "/assets/images/fencer.png",
       "/assets/images/fencer.png",
@@ -65,7 +65,7 @@ export const mockStories: Story[] = [
   {
     id: "5",
     title: "Weekly Wallpapers",
-    subtitle: "(May 19)",
+    subtitle: "(June 2)",
     pages: [
       "/assets/images/fencer.png",
       "/assets/images/fencer.png",
@@ -82,8 +82,8 @@ export const mockStories: Story[] = [
   },
   {
     id: "6",
-    title: "News",
-    subtitle: "(June 3)",
+    title: "Weekly Wallpapers",
+    subtitle: "(May 19)",
     pages: [
       "/assets/images/fencer.png",
       "/assets/images/fencer.png",
