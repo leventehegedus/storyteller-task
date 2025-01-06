@@ -5,7 +5,7 @@ import StoryRowItem from "../StoryRowItem/StoryRowItem";
 
 const StoryRow: React.FC<{ story: Story }> = ({ story }) => (
   <div className="flex px-2.5 odd:bg-white">
-    <StoryRowItem>
+    <StoryRowItem className="min-w-[606px]">
       <div className="font-medium text-base leading-5">
         <div className="text-blue-primary text-nowrap -tracking-[.01em]">
           {story.title}
@@ -17,8 +17,8 @@ const StoryRow: React.FC<{ story: Story }> = ({ story }) => (
         )}
       </div>
     </StoryRowItem>
-    <StoryRowItem>
-      <div className="flex gap-1">
+    <StoryRowItem className="min-w-[273px]">
+      <div className="flex gap-[5px]">
         {story.pages.slice(0, 6).map((page, index) => (
           <img
             key={index}
@@ -34,12 +34,24 @@ const StoryRow: React.FC<{ story: Story }> = ({ story }) => (
         )}
       </div>
     </StoryRowItem>
-    <StoryRowItem className="text-sm">{story.lastModified}</StoryRowItem>
-    <StoryRowItem>
+    <StoryRowItem className="min-w-[165px]">
+      <span className="text-sm text-dark-primary opacity-75 -tracking-[.01em]">
+        {story.lastModified}
+      </span>
+    </StoryRowItem>
+    <StoryRowItem className="w-[111px] justify-center">
       <StatusBadge variant={story.status} />
     </StoryRowItem>
-    <StoryRowItem className="text-sm">{story.liveFrom || "-"}</StoryRowItem>
-    <StoryRowItem className="text-sm">{story.ends || "-"}</StoryRowItem>
+    <StoryRowItem className="text-sm">
+      <span className="text-sm text-dark-primary opacity-75 -tracking-[.01em]">
+        {story.liveFrom || "-"}
+      </span>
+    </StoryRowItem>
+    <StoryRowItem className="text-sm">
+      <span className="text-sm text-dark-primary opacity-75 -tracking-[.01em]">
+        {story.ends || "-"}
+      </span>
+    </StoryRowItem>
     <StoryRowItem>
       <Button text="Edit" variant="green" />
     </StoryRowItem>
