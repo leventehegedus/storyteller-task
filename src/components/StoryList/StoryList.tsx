@@ -4,6 +4,7 @@ import { Search, ChevronDown, Plus } from "lucide-react";
 import { Story, StoryFilters } from "../../types/story";
 import StoryRow from "../StoryRow/StoryRow";
 import { fetchStories } from "../../api/stories";
+import Button from "../Button/Button";
 
 const StoryList: React.FC = () => {
   const [filters, setFilters] = useState<StoryFilters>({
@@ -35,7 +36,7 @@ const StoryList: React.FC = () => {
   return (
     <div className="bg-off-white rounded-b-lg pb-[30px] w-full">
       <header className="flex justify-between items-center flex-wrap py-4 px-[30px] gap-4">
-        <h1 className="text-3xl font-semibold w-full tracking-[.01em]">
+        <h1 className="text-3xl font-semibold w-full tracking-[.01em] text-dark-primary">
           Stories
         </h1>
 
@@ -74,14 +75,16 @@ const StoryList: React.FC = () => {
               size={20}
             />
           </div>
-          <button className="bg-green hover:bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-1 h-9 -tracking-[.01em]">
-            <Plus size={12} />
-            New Story
-          </button>
+          <Button
+            text="New Story"
+            size="medium"
+            variant="green"
+            icon={<Plus size={12} />}
+          />
         </div>
       </header>
 
-      <div role="grid" className="w-full -mt-0.5">
+      <div className="w-full -mt-0.5 max-w-full overflow-auto">
         <div className="border-b flex">
           <div className="text-left py-3 px-4 flex-1">Title</div>
           <div className="text-left py-3 px-4 flex-1">Pages</div>

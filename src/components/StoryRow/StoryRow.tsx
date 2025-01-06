@@ -2,6 +2,7 @@ import { Story } from "../../types/story";
 import Button from "../Button/Button";
 import StatusBadge from "../StatusBadge/StatusBadge";
 import StoryRowItem from "../StoryRowItem/StoryRowItem";
+import { Trash, Edit } from "lucide-react";
 
 const StoryRow: React.FC<{ story: Story }> = ({ story }) => (
   <div className="flex px-2.5 odd:bg-white">
@@ -53,7 +54,15 @@ const StoryRow: React.FC<{ story: Story }> = ({ story }) => (
       </span>
     </StoryRowItem>
     <StoryRowItem>
-      <Button text="Edit" variant="green" />
+      <Button variant="red" icon={<Trash size={11} />} />
+    </StoryRowItem>
+    <StoryRowItem>
+      <Button
+        text="Edit"
+        className="text-xs leading-[14px] "
+        variant="green"
+        icon={<Edit size={12} />}
+      />
     </StoryRowItem>
   </div>
 );
