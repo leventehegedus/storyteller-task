@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className="w-[228px] min-w-[228px]">
+    <nav className="w-[228px] min-w-[228px] bg-dark-primary h-[calc(100vh-60px)] z-50 absolute lg:relative">
       {/* TODO: fix width of the navbar with grid */}
       {menuItems.map((items, index) => (
         <>

@@ -34,7 +34,7 @@ const StoryList: React.FC = () => {
   }, [page, filters]);
 
   return (
-    <div className="bg-off-white rounded-b-lg pb-[30px] w-full">
+    <div className="bg-off-white rounded-b-lg w-full h-auto">
       <header className="flex justify-between items-center flex-wrap py-4 px-[30px] gap-4">
         <h1 className="text-3xl font-semibold w-full tracking-[.01em] text-dark-primary">
           Stories

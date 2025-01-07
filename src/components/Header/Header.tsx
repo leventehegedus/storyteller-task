@@ -1,7 +1,29 @@
-const Header = () => {
+import { Menu, X } from "lucide-react";
+
+interface HeaderProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ open, setOpen }) => {
   return (
     <header className="text-white h-[60px] pl-5 pr-[30px] flex items-center justify-between w-full">
       <div className="flex items-center gap-[11px] h-[38px]">
+        <div className="lg:hidden">
+          {!open ? (
+            <Menu
+              size={20}
+              className="display-block md:display-none cursor-pointer"
+              onClick={() => setOpen(true)}
+            />
+          ) : (
+            <X
+              size={20}
+              className="display-block md:display-none cursor-pointer"
+              onClick={() => setOpen(false)}
+            />
+          )}
+        </div>
         <img
           src="/assets/images/storytellerlogo.svg"
           alt="logo"
