@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NavbarItem from "../NavbarItem/NavbarItem";
 import NavbarItemDivider from "../NavbarItemDivider/NavbarItemDivider";
 

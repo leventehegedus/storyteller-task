@@ -34,27 +34,26 @@ const StoryList: React.FC = () => {
   }, [page, filters]);
 
   return (
-    <div className="bg-off-white rounded-b-lg w-full h-auto">
+    <div className="bg-off-white rounded-b-lg w-full h-full">
       <header className="flex justify-between items-center flex-wrap py-4 px-[30px] gap-4">
         <h1 className="text-3xl font-semibold w-full tracking-[.01em] text-dark-primary">
           Stories
         </h1>
 
-        <div className="flex gap-4 w-full">
-          <div className="relative flex-1">
+        <div className="flex gap-4 w-full gap-[30px]">
+          <div className="relative flex w-[376px] h-9 border-gray-light border rounded-md bg-white overflow-hidden">
             <input
               type="search"
               placeholder="Search"
-              className="w-full pl-10 pr-4 py-2 border rounded-md h-9"
+              className="w-full pl-3 pr-4 py-2 bg-white text-sm leading-5 -tracking-[.01em]"
               value={filters.search}
               onChange={(e) =>
                 setFilters({ ...filters, search: e.target.value })
               }
             />
-            <Search
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-              size={20}
-            />
+            <div className="w-9 h-9 bg-gray-light-search flex items-center justify-center">
+              <Search size={12} />
+            </div>
           </div>
           <div className="relative w-48">
             <select

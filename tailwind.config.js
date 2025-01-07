@@ -26,6 +26,8 @@ export default {
         // Grays
         "gray-light": "#BBBCC2",
         gray: "#A3A3A3",
+        "gray-lighter": "#EBEBEB",
+        "gray-light-search": "#D3D4D9",
       },
       borderRadius: {
         xs: "2.5px",
