@@ -119,41 +119,41 @@ const StoryList: React.FC = () => {
           />
         </div>
       </header>
-      <div className="w-full -mt-0.5 max-w-full flex flex-col h-full h-[calc(100%-156px)]">
-        <div className="border-b flex text-dark-primary flex items-center justify-between font-semibold text-dark-primary opacity-75 text-sm leading-5 pb-2">
-          <div className="pl-[30px]" onClick={() => requestSort("title")}>
+      <div className="-mt-0.5 flex flex-col h-full h-[calc(100%-156px)] overflow-x-auto w-fit">
+        <div className="border-b text-dark-primary flex items-center justify-between font-semibold text-dark-primary opacity-75 text-sm leading-5 pb-2">
+          <div
+            className="pl-[30px] min-w-[410px]"
+            onClick={() => requestSort("title")}
+          >
             Title
           </div>
           <div className="flex">
-            <div className="pl-[10px] w-[273px]">Pages</div>
+            <div className="px-5 w-[273px]">Pages</div>
             <div
-              className="pl-[10px] w-[165px]"
+              className="px-5 w-[165px]"
               onClick={() => requestSort("lastModified")}
             >
               Last Modified
             </div>
             <div
-              className="pl-[10px] w-[111px]"
+              className="px-5 w-[111px]"
               onClick={() => requestSort("status")}
             >
               Status
             </div>
             <div
-              className="pl-[10px] w-[165px]"
+              className="px-5 w-[165px]"
               onClick={() => requestSort("liveFrom")}
             >
               Live From
             </div>
-            <div
-              className="pl-[10px] w-[165px]"
-              onClick={() => requestSort("ends")}
-            >
+            <div className="px-5 w-[165px]" onClick={() => requestSort("ends")}>
               Ends
             </div>
-            <div className="pl-[10px] w-[157px]"></div>
+            <div className="px-5 w-[157px]"></div>
           </div>
         </div>
-        <div className="flex flex-col overflow-auto">
+        <div className="flex flex-col">
           {sortedStories.map((story) => (
             <StoryRow key={story.id} story={story} />
           ))}

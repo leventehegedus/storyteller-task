@@ -7,8 +7,8 @@ import { Trash, Edit } from "lucide-react";
 
 const StoryRow: React.FC<{ story: Story }> = ({ story }) => (
   <div className="flex px-2.5 odd:bg-white">
-    <div className="flex items-center justify-between w-full">
-      <StoryRowItem>
+    <div className="flex items-center justify-between">
+      <StoryRowItem className="min-w-[400px]">
         <div className="font-medium text-base leading-5">
           <div className="text-blue-primary text-nowrap -tracking-[.01em]">
             {story.title}
