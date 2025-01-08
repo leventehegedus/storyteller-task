@@ -1,6 +1,6 @@
 import { useState } from "react";
-import NavbarItem from "../NavbarItem/NavbarItem";
-import NavbarItemDivider from "../NavbarItemDivider/NavbarItemDivider";
+import NavbarItem from "./NavbarItem";
+import NavbarItemDivider from "./NavbarItemDivider";
 
 export interface MenuItem {
   name: string;

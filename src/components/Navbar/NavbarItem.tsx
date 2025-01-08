@@ -1,5 +1,5 @@
-import { MenuItem } from "../Navbar/Navbar";
-import NavbarSubItem from "../NavbarSubItem/NavbarSubItem";
+import { MenuItem } from "./Navbar";
+import NavbarSubItem from "./NavbarSubItem";
 
 interface MenuItemsProps {
   items: MenuItem[];
@@ -20,7 +20,6 @@ const NavbarItem: React.FC<MenuItemsProps> = ({
           {...item}
           onClick={() => {
             setActiveItem(item.name);
-            console.log(`Active item: ${item.name}`);
           }}
           activeItem={activeItem}
         />

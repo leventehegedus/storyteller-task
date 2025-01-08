@@ -9,10 +9,10 @@ import {
   ArrowUp,
 } from "lucide-react";
 import { Story, StoryFilters } from "../../types/story";
-import StoryRow from "../StoryRow/StoryRow";
+import StoryRow from "./StoryRow";
 import { fetchStories } from "../../api/stories";
 import Button from "../Button/Button";
-import SortableHeader from "../SortableHeader/SortableHeader";
+import SortableHeader from "./SortableHeader";
 
 const StoryList: React.FC = () => {
   const [filters, setFilters] = useState<StoryFilters>({
@@ -71,18 +71,6 @@ const StoryList: React.FC = () => {
       direction = "desc";
     }
     setSortConfig({ key, direction });
-  };
-
-  const renderSortIcon = (key: string) => {
-    if (sortConfig && sortConfig.key === key) {
-      return sortConfig.direction === "asc" ? (
-        <ArrowDown size={12} />
-      ) : (
-        <ArrowUp size={12} />
-      );
-    } else {
-      return <ArrowDownUp size={12} />;
-    }
   };
 
   return (

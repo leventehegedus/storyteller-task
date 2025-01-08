@@ -1,4 +1,4 @@
-import { MenuItem } from "../Navbar/Navbar";
+import { MenuItem } from "./Navbar";
 import { cn } from "../../lib/utils";
 
 const NavbarSubItem: React.FC<MenuItem & { onClick: () => void }> = ({
