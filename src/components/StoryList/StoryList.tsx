@@ -16,6 +16,10 @@ const StoryList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const [sortConfig, setSortConfig] = useState<{
+    key: string;
+    direction: "asc" | "desc";
+  } | null>(null);
 
   useEffect(() => {
     const loadStories = async () => {
@@ -33,6 +37,34 @@ const StoryList: React.FC = () => {
     loadStories();
   }, [page, filters]);
 
+  const sortedStories = React.useMemo(() => {
+    const sortableStories = [...stories];
+    if (sortConfig !== null) {
+      sortableStories.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === "asc" ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === "asc" ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableStories;
+  }, [stories, sortConfig]);
+
+  const requestSort = (key: string) => {
+    let direction: "asc" | "desc" = "asc";
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "asc"
+    ) {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+  };
+
   return (
     <div className="bg-off-white rounded-b-lg w-full h-full">
       <header className="flex justify-between items-center flex-wrap py-4 px-[30px] gap-4 mb-5">
@@ -46,7 +78,7 @@ const StoryList: React.FC = () => {
               <input
                 type="search"
                 placeholder="Search"
-                className="w-full pl-3 pr-4 py-2 bg-white text-sm leading-5 -tracking-[.01em]"
+                className="w-full pl-3 pr-4 py-2 bg-white text-dark-primary text-sm leading-5 -tracking-[.01em]"
                 value={filters.search}
                 onChange={(e) =>
                   setFilters({ ...filters, search: e.target.value })
@@ -58,7 +90,7 @@ const StoryList: React.FC = () => {
             </div>
             <div className="relative w-[200px]">
               <select
-                className="w-full appearance-none bg-white border border-gray-light text-dark-primary rounded-md px-3 pr-10 h-9"
+                className="w-full appearance-none bg-white border border-gray-light text-dark-primary rounded-md px-3 pr-10 h-9 text-sm leading-5"
                 value={filters.status}
                 onChange={(e) =>
                   setFilters({ ...filters, status: e.target.value })
@@ -89,18 +121,40 @@ const StoryList: React.FC = () => {
       </header>
       <div className="w-full -mt-0.5 max-w-full overflow-auto">
         <div className="border-b flex text-dark-primary flex items-center justify-between font-semibold text-dark-primary opacity-75 text-sm leading-5 pb-2">
-          <div className="pl-[30px]">Title</div>
+          <div className="pl-[30px]" onClick={() => requestSort("title")}>
+            Title
+          </div>
           <div className="flex">
             <div className="pl-[10px] w-[273px]">Pages</div>
-            <div className="pl-[10px] w-[165px]">Last Modified</div>
-            <div className="pl-[10px] w-[111px]">Status</div>
-            <div className="pl-[10px] w-[165px]">Live From</div>
-            <div className="pl-[10px] w-[165px]">Ends</div>
+            <div
+              className="pl-[10px] w-[165px]"
+              onClick={() => requestSort("lastModified")}
+            >
+              Last Modified
+            </div>
+            <div
+              className="pl-[10px] w-[111px]"
+              onClick={() => requestSort("status")}
+            >
+              Status
+            </div>
+            <div
+              className="pl-[10px] w-[165px]"
+              onClick={() => requestSort("liveFrom")}
+            >
+              Live From
+            </div>
+            <div
+              className="pl-[10px] w-[165px]"
+              onClick={() => requestSort("ends")}
+            >
+              Ends
+            </div>
             <div className="pl-[10px] w-[157px]"></div>
           </div>
         </div>
         <div>
-          {stories.map((story) => (
+          {sortedStories.map((story) => (
             <StoryRow key={story.id} story={story} />
           ))}
         </div>
