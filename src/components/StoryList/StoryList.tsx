@@ -1,10 +1,18 @@
 // Components/StoryList/StoryList.tsx
 import React, { useEffect, useState } from "react";
-import { Search, ChevronDown, Plus } from "lucide-react";
+import {
+  Search,
+  ChevronDown,
+  Plus,
+  ArrowDownUp,
+  ArrowDown,
+  ArrowUp,
+} from "lucide-react";
 import { Story, StoryFilters } from "../../types/story";
 import StoryRow from "../StoryRow/StoryRow";
 import { fetchStories } from "../../api/stories";
 import Button from "../Button/Button";
+import SortableHeader from "../SortableHeader/SortableHeader";
 
 const StoryList: React.FC = () => {
   const [filters, setFilters] = useState<StoryFilters>({
@@ -65,6 +73,18 @@ const StoryList: React.FC = () => {
     setSortConfig({ key, direction });
   };
 
+  const renderSortIcon = (key: string) => {
+    if (sortConfig && sortConfig.key === key) {
+      return sortConfig.direction === "asc" ? (
+        <ArrowDown size={12} />
+      ) : (
+        <ArrowUp size={12} />
+      );
+    } else {
+      return <ArrowDownUp size={12} />;
+    }
+  };
+
   return (
     <div className="bg-off-white rounded-b-lg w-full h-full flex flex-col gap-5">
       <header className="flex justify-between items-center flex-wrap py-4 px-[30px] gap-4 h-[120px]">
@@ -119,41 +139,51 @@ const StoryList: React.FC = () => {
           />
         </div>
       </header>
-      <div className="-mt-0.5 flex flex-col h-full h-[calc(100%-156px)] overflow-x-auto w-fit">
-        <div className="border-b text-dark-primary flex items-center justify-between font-semibold text-dark-primary opacity-75 text-sm leading-5 pb-2">
-          <div
+      <div className="-mt-0.5 flex flex-col h-full h-[calc(100%-156px)] overflow-x-auto w-auto">
+        <div className="border-b text-dark-primary flex items-center justify-between font-semibold text-dark-primary opacity-75 text-sm leading-5 pb-2 w-fit">
+          <SortableHeader
+            label="Title"
+            sortKey="title"
             className="pl-[30px] min-w-[410px]"
-            onClick={() => requestSort("title")}
-          >
-            Title
-          </div>
+            sortConfig={sortConfig}
+            requestSort={requestSort}
+          />
           <div className="flex">
-            <div className="px-5 w-[273px]">Pages</div>
-            <div
-              className="px-5 w-[165px]"
-              onClick={() => requestSort("lastModified")}
-            >
-              Last Modified
+            <div className="flex">
+              <div className="px-5 w-[273px]">Pages</div>
+              <SortableHeader
+                label="Last Modified"
+                sortKey="lastModified"
+                className="w-[165px]"
+                sortConfig={sortConfig}
+                requestSort={requestSort}
+              />
+              <SortableHeader
+                label="Status"
+                sortKey="status"
+                className="w-[111px]"
+                sortConfig={sortConfig}
+                requestSort={requestSort}
+              />
+              <SortableHeader
+                label="Live From"
+                sortKey="liveFrom"
+                className="w-[165px]"
+                sortConfig={sortConfig}
+                requestSort={requestSort}
+              />
+              <SortableHeader
+                label="Ends"
+                sortKey="ends"
+                className="w-[165px]"
+                sortConfig={sortConfig}
+                requestSort={requestSort}
+              />
+              <div className="px-5 w-[157px]"></div>
             </div>
-            <div
-              className="px-5 w-[111px]"
-              onClick={() => requestSort("status")}
-            >
-              Status
-            </div>
-            <div
-              className="px-5 w-[165px]"
-              onClick={() => requestSort("liveFrom")}
-            >
-              Live From
-            </div>
-            <div className="px-5 w-[165px]" onClick={() => requestSort("ends")}>
-              Ends
-            </div>
-            <div className="px-5 w-[157px]"></div>
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-fit">
           {sortedStories.map((story) => (
             <StoryRow key={story.id} story={story} />
           ))}
