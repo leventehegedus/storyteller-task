@@ -66,8 +66,8 @@ const StoryList: React.FC = () => {
   };
 
   return (
-    <div className="bg-off-white rounded-b-lg w-full h-full">
-      <header className="flex justify-between items-center flex-wrap py-4 px-[30px] gap-4 mb-5">
+    <div className="bg-off-white rounded-b-lg w-full h-full flex flex-col gap-5">
+      <header className="flex justify-between items-center flex-wrap py-4 px-[30px] gap-4 h-[120px]">
         <h1 className="text-3xl font-semibold w-full tracking-[.01em] text-dark-primary">
           Stories
         </h1>
@@ -119,7 +119,7 @@ const StoryList: React.FC = () => {
           />
         </div>
       </header>
-      <div className="w-full -mt-0.5 max-w-full overflow-auto">
+      <div className="w-full -mt-0.5 max-w-full flex flex-col h-full h-[calc(100%-156px)]">
         <div className="border-b flex text-dark-primary flex items-center justify-between font-semibold text-dark-primary opacity-75 text-sm leading-5 pb-2">
           <div className="pl-[30px]" onClick={() => requestSort("title")}>
             Title
@@ -153,36 +153,36 @@ const StoryList: React.FC = () => {
             <div className="pl-[10px] w-[157px]"></div>
           </div>
         </div>
-        <div>
+        <div className="flex flex-col overflow-auto">
           {sortedStories.map((story) => (
             <StoryRow key={story.id} story={story} />
           ))}
+          <footer className="flex justify-between items-center h-9">
+            <div className="flex items-center gap-4">
+              <span>Page 1 of 1</span>
+              <select className="border rounded-md px-2 py-1">
+                <option>20 Rows</option>
+                <option>50 Rows</option>
+                <option>100 Rows</option>
+              </select>
+            </div>
+            <div className="flex gap-2">
+              <button
+                className="px-3 py-1 border rounded-md disabled:opacity-50"
+                disabled
+              >
+                Previous
+              </button>
+              <button
+                className="px-3 py-1 border rounded-md disabled:opacity-50"
+                disabled
+              >
+                Next
+              </button>
+            </div>
+          </footer>
         </div>
       </div>
-      <footer className="flex justify-between items-center mt-6">
-        <div className="flex items-center gap-4">
-          <span>Page 1 of 1</span>
-          <select className="border rounded-md px-2 py-1">
-            <option>20 Rows</option>
-            <option>50 Rows</option>
-            <option>100 Rows</option>
-          </select>
-        </div>
-        <div className="flex gap-2">
-          <button
-            className="px-3 py-1 border rounded-md disabled:opacity-50"
-            disabled
-          >
-            Previous
-          </button>
-          <button
-            className="px-3 py-1 border rounded-md disabled:opacity-50"
-            disabled
-          >
-            Next
-          </button>
-        </div>
-      </footer>
     </div>
   );
 };

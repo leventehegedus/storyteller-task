@@ -25,7 +25,7 @@ const App = () => {
         >
           <Navbar />
         </div>
-        <div className="w-full lg:w-[calc(100%-228px)] h-[calc(100vh-60px)] overflow-auto pb-[30px]">
+        <div className="w-full lg:w-[calc(100%-228px)] h-[calc(100vh-60px)] pb-[30px]">
           <StoryList />
         </div>
         {isMenuOpen && (
