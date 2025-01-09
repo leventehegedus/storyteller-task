@@ -1,12 +1,12 @@
 // Components/StoryList/StoryList.tsx
 import React, { useEffect, useMemo, useState } from "react";
-import { Search, ChevronDown, Plus, ArrowLeft, ArrowRight } from "lucide-react";
+import { Search, ChevronDown, Plus } from "lucide-react";
 import { Story, StoryFilters } from "../../types/story";
 import StoryRow from "./StoryRow";
 import { fetchStories } from "../../api/stories";
 import Button from "../Button/Button";
 import SortableHeader from "./SortableHeader";
-import Pagination from "./Pagination";
+import Pagination from "./Pagination/Pagination";
 
 const StoryList: React.FC = () => {
   const [filters, setFilters] = useState<StoryFilters>({
@@ -15,11 +15,9 @@ const StoryList: React.FC = () => {
   });
 
   const [stories, setStories] = useState<Story[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "asc" | "desc";
@@ -29,19 +27,19 @@ const StoryList: React.FC = () => {
 
   useEffect(() => {
     const loadStories = async () => {
-      setLoading(true);
       const { stories: newStories, total } = await fetchStories(
-        page,
-        20,
+        currentPage,
+        rowsPerPage,
         filters
       );
+      console.log(total);
+      console.log(newStories);
       setStories(newStories);
       setTotal(total);
-      setLoading(false);
     };
 
     loadStories();
-  }, [page, filters, total]);
+  }, [currentPage, filters, total, rowsPerPage]);
 
   const sortedStories = useMemo(() => {
     let sortableStories = [...stories];
@@ -110,8 +108,8 @@ const StoryList: React.FC = () => {
             <div className="relative flex w-[376px] h-9 border-gray-light border rounded-md bg-white overflow-hidden">
               <input
                 type="search"
-                className="w-full pl-3 pr-10 py-2 bg-white text-dark-primary text-sm leading-5 -tracking-[.01em]"
-                placeholder="Search stories"
+                className="w-full pl-3 pr-10 py-2 bg-white text-dark-primary text-sm leading-5 -tracking-[.01em] font-normal placeholder:text-gray"
+                placeholder="Search"
                 value={filters.search}
                 onChange={(e) =>
                   setFilters({ ...filters, search: e.target.value })
@@ -124,7 +122,7 @@ const StoryList: React.FC = () => {
             </div>
             <div className="relative w-[200px]">
               <select
-                className="w-full appearance-none bg-white border border-gray-light text-dark-primary rounded-md px-3 pr-10 h-9 text-sm leading-5"
+                className="w-full appearance-none bg-white border border-gray-light text-dark-primary rounded-md px-3 pr-10 h-9 text-sm leading-5 -tracking-[.01em]"
                 value={filters.status}
                 onChange={(e) =>
                   setFilters({ ...filters, status: e.target.value })
@@ -150,42 +148,51 @@ const StoryList: React.FC = () => {
           />
         </div>
       </header>
-      <div className="w-full -mt-0.5 max-w-full overflow-auto">
-        <div className="border-b flex">
+      <div className="w-auto 2xl:w-full -mt-0.5 overflow-auto">
+        <div className="border-b flex justify-between pb-2 border-b-gray-lighter w-fit 2xl:w-auto">
           <SortableHeader
             label="Title"
             sortKey="title"
             sortConfig={sortConfig}
             requestSort={requestSort}
+            className="min-w-[420px] pl-[30px]"
           />
-          <div className="px-5 w-[273px]">Pages</div>
-          <SortableHeader
-            label="Last Modified"
-            sortKey="lastModified"
-            sortConfig={sortConfig}
-            requestSort={requestSort}
-          />
-          <SortableHeader
-            label="Status"
-            sortKey="status"
-            sortConfig={sortConfig}
-            requestSort={requestSort}
-          />
-          <SortableHeader
-            label="Live From"
-            sortKey="liveFrom"
-            sortConfig={sortConfig}
-            requestSort={requestSort}
-          />
-          <SortableHeader
-            label="Ends"
-            sortKey="ends"
-            sortConfig={sortConfig}
-            requestSort={requestSort}
-          />
-          <div className="px-5 w-[157px]"></div>
+          <div className="flex items-center">
+            <div className="px-2.5 w-[273px] text-sm leading-5 text-dark-primary">
+              Pages
+            </div>
+            <SortableHeader
+              label="Last Modified"
+              sortKey="lastModified"
+              sortConfig={sortConfig}
+              requestSort={requestSort}
+              className="w-[165px]"
+            />
+            <SortableHeader
+              label="Status"
+              sortKey="status"
+              sortConfig={sortConfig}
+              requestSort={requestSort}
+              className="w-[111px]"
+            />
+            <SortableHeader
+              label="Live From"
+              sortKey="liveFrom"
+              sortConfig={sortConfig}
+              requestSort={requestSort}
+              className="w-[165px]"
+            />
+            <SortableHeader
+              label="Ends"
+              sortKey="ends"
+              sortConfig={sortConfig}
+              requestSort={requestSort}
+              className="w-[165px]"
+            />
+            <div className="px-5 w-[157px]"></div>
+          </div>
         </div>
-        <div className="flex flex-col w-fit">
+        <div className="flex flex-col w-fit 2xl:w-full">
           {paginatedStories.map((story) => (
             <StoryRow key={story.id} story={story} />
           ))}

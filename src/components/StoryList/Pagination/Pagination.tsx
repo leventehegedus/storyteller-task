@@ -53,14 +53,14 @@ const Pagination: React.FC<PaginationProps> = ({
     </div>
     <div className="flex text-dark-primary text-sm leading-5 flex items-center -tracking-[.01em] opacity-50">
       <button
-        className="p-0 rounded-none rounded-l-md border border-gray-light h-9 w-9 flex items-center justify-center -mr-px"
+        className="p-0 rounded-none rounded-l-md border border-gray-light h-9 w-9 flex items-center justify-center -mr-px bg-white"
         onClick={handlePreviousPage}
         disabled={currentPage === 1}
       >
         <ArrowLeft size={11} />
       </button>
       <button
-        className="p-0 rounded-none rounded-r-md border border-gray-light h-9 w-9 flex items-center justify-center"
+        className="p-0 rounded-none rounded-r-md border border-gray-light h-9 w-9 flex items-center justify-center bg-white"
         onClick={handleNextPage}
         disabled={currentPage === totalPages}
       >

@@ -28,6 +28,7 @@ export default {
         gray: "#A3A3A3",
         "gray-lighter": "#EBEBEB",
         "gray-light-search": "#D3D4D9",
+        "gray-dark": "#444647",
       },
       borderRadius: {
         xs: "2.5px",

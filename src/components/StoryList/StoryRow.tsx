@@ -9,9 +9,10 @@ import StoryTitle from "./StoryTitle";
 
 const textStyles = "text-sm text-dark-primary opacity-75 -tracking-[.01em]";
 const StoryRow: React.FC<{ story: Story }> = ({ story }) => {
+  console.log(story);
   return (
     <div className="flex px-2.5 odd:bg-white">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between w-full">
         <StoryRowItem className="min-w-[400px]">
           <StoryTitle title={story.title} subtitle={story.subtitle} />
         </StoryRowItem>

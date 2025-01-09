@@ -20,18 +20,21 @@ const SortableHeader: React.FC<SortableHeaderProps> = ({
   const renderSortIcon = () => {
     if (sortConfig && sortConfig.key === sortKey) {
       return sortConfig.direction === "asc" ? (
-        <ArrowDown size={12} />
+        <ArrowDown size={12} className="text-dark-primary" />
       ) : (
-        <ArrowUp size={12} />
+        <ArrowUp size={12} className="text-dark-primary" />
       );
     } else {
-      return <ArrowDownUp size={12} />;
+      return <ArrowDownUp size={12} className="text-gray-dark" />;
     }
   };
 
   return (
     <div
-      className={cn("px-5 flex items-center gap-1 cursor-pointer", className)}
+      className={cn(
+        "px-2.5 flex items-center gap-1 cursor-pointer text-sm leading-5 text-dark-primary font-semibold",
+        className
+      )}
       onClick={() => requestSort(sortKey)}
     >
       <span>{label}</span>
