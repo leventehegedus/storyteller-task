@@ -8,6 +8,8 @@ import Button from "../Button/Button";
 import SortableHeader from "./SortableHeader";
 import Pagination from "./Pagination/Pagination";
 
+type StoryKey = keyof Story;
+
 const StoryList: React.FC = () => {
   const [filters, setFilters] = useState<StoryFilters>({
     search: "",
@@ -19,7 +21,7 @@ const StoryList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState<{
-    key: string;
+    key: StoryKey;
     direction: "asc" | "desc";
   } | null>(null);
 
@@ -42,14 +44,17 @@ const StoryList: React.FC = () => {
   }, [currentPage, filters, total, rowsPerPage]);
 
   const sortedStories = useMemo(() => {
-    let sortableStories = [...stories];
+    const sortableStories = [...stories];
     if (sortConfig !== null) {
       sortableStories.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === "asc" ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === "asc" ? 1 : -1;
+        const key = sortConfig.key;
+        if (a && b && a[key] && b[key]) {
+          if (a[key] < b[key]) {
+            return sortConfig.direction === "asc" ? -1 : 1;
+          }
+          if (a[key] > b[key]) {
+            return sortConfig.direction === "asc" ? 1 : -1;
+          }
         }
         return 0;
       });
@@ -63,7 +68,7 @@ const StoryList: React.FC = () => {
     return sortedStories.slice(startIndex, endIndex);
   }, [sortedStories, currentPage, rowsPerPage]);
 
-  const requestSort = (key: string) => {
+  const requestSort = (key: StoryKey) => {
     let direction: "asc" | "desc" = "asc";
     if (
       sortConfig &&

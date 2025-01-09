@@ -1,13 +1,16 @@
 import React from "react";
 import { ArrowDownUp, ArrowDown, ArrowUp } from "lucide-react";
 import { cn } from "../../lib/utils";
+import { Story } from "../../types/story";
+
+type StoryKey = keyof Story;
 
 interface SortableHeaderProps {
   label: string;
-  sortKey: string;
+  sortKey: StoryKey;
   sortConfig: { key: string; direction: "asc" | "desc" } | null;
   className?: string;
-  requestSort: (key: string) => void;
+  requestSort: (key: StoryKey) => void;
 }
 
 const SortableHeader: React.FC<SortableHeaderProps> = ({
@@ -25,7 +28,7 @@ const SortableHeader: React.FC<SortableHeaderProps> = ({
         <ArrowUp size={12} className="text-dark-primary" />
       );
     } else {
-      return <ArrowDownUp size={12} className="text-gray-dark" />;
+      return <ArrowDownUp size={12} className="text-gray" />;
     }
   };
 
