@@ -97,15 +97,27 @@ const StoryList: React.FC = () => {
     }
   };
 
+  const startItemIndex = (currentPage - 1) * rowsPerPage + 1;
+  const endItemIndex = Math.min(currentPage * rowsPerPage, total);
+
   return (
-    <div className="bg-off-white rounded-b-lg w-full h-full flex flex-col gap-5">
-      <header className="flex justify-between items-center flex-wrap py-4 px-[30px] gap-4 h-[120px]">
-        <h1 className="text-3xl font-semibold w-full tracking-[.01em] text-dark-primary">
-          Stories
-        </h1>
-        <div className="flex gap-4 w-full gap-[30px] justify-between">
-          <div className="flex gap-[30px]">
-            <div className="relative flex w-[376px] h-9 border-gray-light border rounded-md bg-white overflow-hidden">
+    <div className="bg-off-white rounded-none lg:rounded-b-lg w-full h-full flex flex-col gap-0 lg:gap-5">
+      <header className="flex justify-between items-center flex-wrap py-4 px-4 lg:px-[30px] gap-4 h-[120px]">
+        <div className="flex justify-between w-full">
+          <h1 className="text-3xl font-semibold w-auto lg:w-full tracking-[.01em] text-dark-primary">
+            Stories
+          </h1>
+          <Button
+            className="flex lg:hidden"
+            text="New Story"
+            size="medium"
+            variant="green"
+            icon={<Plus size={12} />}
+          />
+        </div>
+        <div className="flex w-full gap-0 lg:gap-[30px] justify-between">
+          <div className="flex gap-4 lg:gap-[30px] w-full lg:w-auto items-center">
+            <div className="relative flex w-full lg:w-[376px] h-9 border-gray-light border rounded-md bg-white overflow-hidden">
               <input
                 type="search"
                 className="w-full pl-3 pr-10 py-2 bg-white text-dark-primary text-sm leading-5 -tracking-[.01em] font-normal placeholder:text-gray"
@@ -115,12 +127,11 @@ const StoryList: React.FC = () => {
                   setFilters({ ...filters, search: e.target.value })
                 }
               />
-              <Search
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-primary"
-                size={20}
-              />
+              <div className="bg-gray-light-search h-9 min-w-9 w-9 flex items-center justify-center">
+                <Search className="text-white" size={18} />
+              </div>
             </div>
-            <div className="relative w-[200px]">
+            <div className="relative w-full lg:w-[200px]">
               <select
                 className="w-full appearance-none bg-white border border-gray-light text-dark-primary rounded-md px-3 pr-10 h-9 text-sm leading-5 -tracking-[.01em]"
                 value={filters.status}
@@ -139,8 +150,12 @@ const StoryList: React.FC = () => {
                 size={20}
               />
             </div>
+            <div className="text-sm text-dark-primary opacity-75 -tracking-[.01em] hidden lg:block">
+              Showing {startItemIndex} to {endItemIndex} from {total}
+            </div>
           </div>
           <Button
+            className="hidden lg:flex"
             text="New Story"
             size="medium"
             variant="green"
@@ -155,7 +170,7 @@ const StoryList: React.FC = () => {
             sortKey="title"
             sortConfig={sortConfig}
             requestSort={requestSort}
-            className="min-w-[420px] pl-[30px]"
+            className="min-w-[222px] lg:min-w-[420px] pl-[30px]"
           />
           <div className="flex items-center">
             <div className="px-2.5 w-[273px] text-sm leading-5 text-dark-primary">
@@ -204,9 +219,20 @@ const StoryList: React.FC = () => {
             handleRowsPerPageChange={handleRowsPerPageChange}
             handleNextPage={handleNextPage}
             handlePreviousPage={handlePreviousPage}
+            className="hidden lg:flex"
           />
         </div>
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        rowsPerPage={rowsPerPage}
+        handlePageChange={handlePageChange}
+        handleRowsPerPageChange={handleRowsPerPageChange}
+        handleNextPage={handleNextPage}
+        handlePreviousPage={handlePreviousPage}
+        className="flex lg:hidden"
+      />
     </div>
   );
 };

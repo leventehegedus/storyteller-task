@@ -1,6 +1,7 @@
 // Pagination.tsx
 import React from "react";
 import { ArrowLeft, ArrowRight, ChevronDown } from "lucide-react";
+import { cn } from "../../../lib/utils";
 
 interface PaginationProps {
   currentPage: number;
@@ -10,6 +11,7 @@ interface PaginationProps {
   handleRowsPerPageChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleNextPage: () => void;
   handlePreviousPage: () => void;
+  className?: string;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
@@ -20,8 +22,14 @@ const Pagination: React.FC<PaginationProps> = ({
   handleRowsPerPageChange,
   handleNextPage,
   handlePreviousPage,
+  className,
 }) => (
-  <footer className="flex justify-end gap-[30px] items-center h-9 px-[30px] pt-6 pb-[30px] h-auto">
+  <footer
+    className={cn(
+      "justify-end gap-[30px] items-center h-9 px-4 lg:px-[30px] pt-3.5 lg:pt-6 pb-4 lg:pb-[30px] h-auto",
+      className
+    )}
+  >
     <div className="flex items-center gap-1.5 text-dark-primary text-sm leading-5 flex items-center -tracking-[.01em]">
       <span>Page</span>
       <div className="relative flex h-9 border-gray-light border rounded-md bg-white overflow-hidden">

@@ -9,7 +9,7 @@ interface MainContentProps {
 }
 
 const MainContent: React.FC<MainContentProps> = ({ isMenuOpen }) => (
-  <div className="flex pr-[30px]">
+  <div className="flex pr-0 lg:pr-[30px]">
     <div
       className={cn(
         "invisible absolute lg:relative lg:visible transition-all",
@@ -21,7 +21,7 @@ const MainContent: React.FC<MainContentProps> = ({ isMenuOpen }) => (
     >
       <Navbar />
     </div>
-    <div className="w-full lg:w-[calc(100%-228px)] h-[calc(100vh-60px)] pb-[30px]">
+    <div className="w-full lg:w-[calc(100%-228px)] h-[calc(100vh-60px)] pb-0 lg:pb-[30px]">
       <StoryList />
     </div>
   </div>

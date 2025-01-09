@@ -38,6 +38,7 @@ export const mockStories: Story[] = [
       "/assets/images/foci.jpeg",
       "/assets/images/foci.jpeg",
       "/assets/images/foci.jpeg",
+      "/assets/images/foci.jpeg",
       "/assets/images/fencer.png",
     ],
     lastModified: "Mar 5, 5:11 PM",
