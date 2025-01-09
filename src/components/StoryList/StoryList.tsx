@@ -155,7 +155,7 @@ const StoryList: React.FC = () => {
                 size={20}
               />
             </div>
-            <div className="text-sm text-dark-primary opacity-75 -tracking-[.01em] hidden lg:block">
+            <div className="text-sm text-dark-primary opacity-75 -tracking-[.01em] hidden xl:block">
               Showing {startItemIndex} to {endItemIndex} from {total}
             </div>
           </div>
@@ -175,7 +175,7 @@ const StoryList: React.FC = () => {
             sortKey="title"
             sortConfig={sortConfig}
             requestSort={requestSort}
-            className="min-w-[222px] lg:min-w-[420px] pl-[30px]"
+            className="min-w-[222px] lg:min-w-[242px] pl-[30px]"
           />
           <div className="flex items-center">
             <div className="px-2.5 w-[273px] text-sm leading-5 text-dark-primary">

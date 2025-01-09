@@ -13,7 +13,7 @@ const StoryRow: React.FC<{ story: Story }> = ({ story }) => {
   return (
     <div className="flex px-2.5 odd:bg-white">
       <div className="flex items-center justify-between w-full">
-        <StoryRowItem className="min-w-[202px] lg:min-w-[400px]">
+        <StoryRowItem className="min-w-[202px] lg:min-w-[222px]">
           <StoryTitle title={story.title} subtitle={story.subtitle} />
         </StoryRowItem>
         <div className="flex">

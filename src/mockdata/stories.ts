@@ -48,7 +48,7 @@ export const mockStories: Story[] = [
   },
   {
     id: "4",
-    title: "Daily Horoscope",
+    title: "Daily Horoscope Daily Horoscope Daily Horoscope Daily Horoscope",
     subtitle: "(November 23)",
     pages: [
       "/assets/images/fencer.png",
