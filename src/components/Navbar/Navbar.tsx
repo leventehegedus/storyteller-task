@@ -11,7 +11,6 @@ export interface MenuItem {
 const Navbar: React.FC = () => {
   const [activeItem, setActiveItem] = useState<string>("Stories");
 
-  // todo: change icons to match design
   const menuItems: MenuItem[][] = [
     [
       { name: "Schedule", icon: "🗓️" },
@@ -30,17 +29,15 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="w-[228px] min-w-[228px] bg-dark-primary h-[calc(100vh-60px)] z-50 absolute lg:relative">
-      {/* TODO: fix width of the navbar with grid */}
       {menuItems.map((items, index) => (
-        <>
+        <div key={index}>
           <NavbarItemDivider />
           <NavbarItem
-            key={index}
             items={items}
             activeItem={activeItem}
             setActiveItem={setActiveItem}
           />
-        </>
+        </div>
       ))}
     </nav>
   );

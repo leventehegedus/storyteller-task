@@ -35,7 +35,7 @@ const SortableHeader: React.FC<SortableHeaderProps> = ({
   return (
     <div
       className={cn(
-        "px-2.5 flex items-center gap-1 cursor-pointer text-sm leading-5 text-dark-primary font-semibold",
+        "px-2.5 flex items-center gap-1.5 cursor-pointer text-sm leading-5 text-dark-primary font-semibold",
         className
       )}
       onClick={() => requestSort(sortKey)}

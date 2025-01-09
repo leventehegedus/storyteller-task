@@ -125,8 +125,8 @@ const StoryList: React.FC = () => {
                   setFilters({ ...filters, search: e.target.value })
                 }
               />
-              <div className="bg-gray-light-search h-9 min-w-9 w-9 flex items-center justify-center">
-                <Search className="text-white" size={18} />
+              <div className="bg-gray-light-search h-[34px] min-w-[34px] w-[34px] flex items-center justify-center">
+                <Search className="text-white" size={12} />
               </div>
             </div>
             <div className="relative w-full lg:w-[200px]">
@@ -144,11 +144,11 @@ const StoryList: React.FC = () => {
                 <option>Past</option>
               </select>
               <ChevronDown
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-primary"
-                size={20}
+                className="absolute right-2.5 top-1/2 transform -translate-y-1/2 text-dark-primary"
+                size={18}
               />
             </div>
-            <div className="text-sm text-dark-primary opacity-75 -tracking-[.01em] hidden xl:block">
+            <div className="text-sm text-dark-primary -tracking-[.01em] hidden xl:block">
               Showing {startItemIndex} to {endItemIndex} from {total}
             </div>
           </div>

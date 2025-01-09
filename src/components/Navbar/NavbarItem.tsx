@@ -14,16 +14,14 @@ const NavbarItem: React.FC<MenuItemsProps> = ({
 }) => (
   <ul className="py-5">
     {items.map((item) => (
-      <>
-        <NavbarSubItem
-          key={item.name}
-          {...item}
-          onClick={() => {
-            setActiveItem(item.name);
-          }}
-          activeItem={activeItem}
-        />
-      </>
+      <NavbarSubItem
+        key={item.name}
+        {...item}
+        onClick={() => {
+          setActiveItem(item.name);
+        }}
+        activeItem={activeItem}
+      />
     ))}
   </ul>
 );
