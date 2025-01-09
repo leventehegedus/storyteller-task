@@ -1,21 +1,32 @@
+import React from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-const PageNavigation: React.FC<{
+interface PageNavigationProps {
   currentPage: number;
   totalPages: number;
   handleNextPage: () => void;
   handlePreviousPage: () => void;
-}> = ({ currentPage, totalPages, handleNextPage, handlePreviousPage }) => (
-  <div className="flex text-dark-primary text-sm leading-5 flex items-center -tracking-[.01em] opacity-50">
+}
+
+const buttonClasses =
+  "p-0 rounded-none border border-gray-light h-9 w-9 flex items-center justify-center bg-white disabled:opacity-25 disabled:cursor-not-allowed";
+
+const PageNavigation: React.FC<PageNavigationProps> = ({
+  currentPage,
+  totalPages,
+  handleNextPage,
+  handlePreviousPage,
+}) => (
+  <div className="flex text-dark-primary text-sm leading-5 items-center -tracking-[.01em] opacity-50">
     <button
-      className="p-0 rounded-none rounded-l-md border border-gray-light h-9 w-9 flex items-center justify-center -mr-px"
+      className={`${buttonClasses} rounded-l-md -mr-px`}
       onClick={handlePreviousPage}
       disabled={currentPage === 1}
     >
       <ArrowLeft size={11} />
     </button>
     <button
-      className="p-0 rounded-none rounded-r-md border border-gray-light h-9 w-9 flex items-center justify-center"
+      className={`${buttonClasses} rounded-r-md`}
       onClick={handleNextPage}
       disabled={currentPage === totalPages}
     >

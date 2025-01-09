@@ -19,7 +19,7 @@ const StoryList: React.FC = () => {
   const [stories, setStories] = useState<Story[]>([]);
   const [total, setTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [sortConfig, setSortConfig] = useState<{
     key: StoryKey;
     direction: "asc" | "desc";
@@ -34,8 +34,7 @@ const StoryList: React.FC = () => {
         rowsPerPage,
         filters
       );
-      console.log(total);
-      console.log(newStories);
+
       setStories(newStories);
       setTotal(total);
     };
@@ -61,12 +60,6 @@ const StoryList: React.FC = () => {
     }
     return sortableStories;
   }, [stories, sortConfig]);
-
-  const paginatedStories = useMemo(() => {
-    const startIndex = (currentPage - 1) * rowsPerPage;
-    const endIndex = startIndex + rowsPerPage;
-    return sortedStories.slice(startIndex, endIndex);
-  }, [sortedStories, currentPage, rowsPerPage]);
 
   const requestSort = (key: StoryKey) => {
     let direction: "asc" | "desc" = "asc";
@@ -102,7 +95,7 @@ const StoryList: React.FC = () => {
     }
   };
 
-  const startItemIndex = (currentPage - 1) * rowsPerPage + 1;
+  const startItemIndex = total > 0 ? (currentPage - 1) * rowsPerPage + 1 : 0;
   const endItemIndex = Math.min(currentPage * rowsPerPage, total);
 
   return (
@@ -213,7 +206,7 @@ const StoryList: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col w-fit 2xl:w-full">
-          {paginatedStories.map((story) => (
+          {sortedStories.map((story) => (
             <StoryRow key={story.id} story={story} />
           ))}
           <Pagination

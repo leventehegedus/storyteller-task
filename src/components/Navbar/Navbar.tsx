@@ -23,9 +23,9 @@ const Navbar: React.FC = () => {
     [
       { name: "CMS Users", icon: "👥" },
       { name: "Roles", icon: "🗃️" },
-      { name: "Apps", icon: "< />" },
+      { name: "Apps", icon: "📱" },
     ],
-    [{ name: "User guide", icon: "?" }],
+    [{ name: "User guide", icon: "❔" }],
   ];
 
   return (

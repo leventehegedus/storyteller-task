@@ -1,5 +1,7 @@
 import { Status, Story } from "../types/story";
 
+export const rowsPerPageOptions = [5, 10, 20];
+
 export const mockStories: Story[] = [
   {
     id: "1",
@@ -42,7 +44,7 @@ export const mockStories: Story[] = [
       "/assets/images/fencer.png",
     ],
     lastModified: "Mar 5, 5:11 PM",
-    status: Status.Live,
+    status: Status.Past,
     liveFrom: "Oct 16, 1:30 PM",
     ends: "Jan 12, 9:45 PM",
   },

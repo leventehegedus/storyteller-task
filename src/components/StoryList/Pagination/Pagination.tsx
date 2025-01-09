@@ -1,7 +1,9 @@
 // Pagination.tsx
 import React from "react";
-import { ArrowLeft, ArrowRight, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "../../../lib/utils";
+import PageNavigation from "./PageNavigation";
+import { rowsPerPageOptions } from "../../../mockdata/stories";
 
 interface PaginationProps {
   currentPage: number;
@@ -50,31 +52,23 @@ const Pagination: React.FC<PaginationProps> = ({
         value={rowsPerPage}
         onChange={handleRowsPerPageChange}
       >
-        <option value={5}>5 Rows</option>
-        <option value={10}>10 Rows</option>
-        <option value={20}>20 Rows</option>
-      </select>
+        {rowsPerPageOptions.map((option) => (
+          <option key={option} value={option}>
+            {option} Rows
+          </option>
+        ))}
+      </select>{" "}
       <ChevronDown
         className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-primary -tracking-[.01em]"
         size={20}
       />
     </div>
-    <div className="flex text-dark-primary text-sm leading-5 flex items-center -tracking-[.01em] opacity-50">
-      <button
-        className="p-0 rounded-none rounded-l-md border border-gray-light h-9 w-9 flex items-center justify-center -mr-px bg-white"
-        onClick={handlePreviousPage}
-        disabled={currentPage === 1}
-      >
-        <ArrowLeft size={11} />
-      </button>
-      <button
-        className="p-0 rounded-none rounded-r-md border border-gray-light h-9 w-9 flex items-center justify-center bg-white"
-        onClick={handleNextPage}
-        disabled={currentPage === totalPages}
-      >
-        <ArrowRight size={11} />
-      </button>
-    </div>
+    <PageNavigation
+      currentPage={currentPage}
+      totalPages={totalPages}
+      handleNextPage={handleNextPage}
+      handlePreviousPage={handlePreviousPage}
+    />
   </footer>
 );
 

@@ -1,4 +1,3 @@
-// hooks/useIsLargeScreen.ts
 import { useState, useEffect } from "react";
 
 const useIsLargeScreen = () => {
@@ -9,7 +8,7 @@ const useIsLargeScreen = () => {
       setIsLargeScreen(window.innerWidth >= 1024); // Tailwind's lg breakpoint is 1024px
     };
 
-    handleResize(); // Set initial value
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
