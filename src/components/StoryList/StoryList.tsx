@@ -1,13 +1,6 @@
 // Components/StoryList/StoryList.tsx
-import React, { useEffect, useState } from "react";
-import {
-  Search,
-  ChevronDown,
-  Plus,
-  ArrowDownUp,
-  ArrowDown,
-  ArrowUp,
-} from "lucide-react";
+import React, { useEffect, useMemo, useState } from "react";
+import { Search, ChevronDown, Plus, ArrowLeft, ArrowRight } from "lucide-react";
 import { Story, StoryFilters } from "../../types/story";
 import StoryRow from "./StoryRow";
 import { fetchStories } from "../../api/stories";
@@ -24,10 +17,14 @@ const StoryList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "asc" | "desc";
   } | null>(null);
+
+  const totalPages = Math.ceil(total / rowsPerPage);
 
   useEffect(() => {
     const loadStories = async () => {
@@ -43,10 +40,10 @@ const StoryList: React.FC = () => {
     };
 
     loadStories();
-  }, [page, filters]);
+  }, [page, filters, total]);
 
-  const sortedStories = React.useMemo(() => {
-    const sortableStories = [...stories];
+  const sortedStories = useMemo(() => {
+    let sortableStories = [...stories];
     if (sortConfig !== null) {
       sortableStories.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -61,6 +58,12 @@ const StoryList: React.FC = () => {
     return sortableStories;
   }, [stories, sortConfig]);
 
+  const paginatedStories = useMemo(() => {
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+    return sortedStories.slice(startIndex, endIndex);
+  }, [sortedStories, currentPage, rowsPerPage]);
+
   const requestSort = (key: string) => {
     let direction: "asc" | "desc" = "asc";
     if (
@@ -71,6 +74,23 @@ const StoryList: React.FC = () => {
       direction = "desc";
     }
     setSortConfig({ key, direction });
+  };
+
+  const handleRowsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setRowsPerPage(Number(e.target.value));
+    setCurrentPage(1); // Reset to first page when rows per page changes
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   return (
@@ -172,30 +192,53 @@ const StoryList: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col w-fit">
-          {sortedStories.map((story) => (
+          {paginatedStories.map((story) => (
             <StoryRow key={story.id} story={story} />
           ))}
-          <footer className="flex justify-between items-center h-9">
-            <div className="flex items-center gap-4">
-              <span>Page 1 of 1</span>
-              <select className="border rounded-md px-2 py-1">
-                <option>20 Rows</option>
-                <option>50 Rows</option>
-                <option>100 Rows</option>
-              </select>
+          <footer className="flex justify-end gap-[30px] items-center h-9 px-[30px] pt-6 pb-[30px] h-auto">
+            <div className="flex items-center gap-1.5 text-dark-primary text-sm leading-5 flex items-center -tracking-[.01em]">
+              <span>Page</span>
+              <div className="relative flex h-9 border-gray-light border rounded-md bg-white overflow-hidden">
+                <input
+                  type="number"
+                  min="1"
+                  max={totalPages}
+                  value={currentPage}
+                  onChange={(e) => setCurrentPage(Number(e.target.value))}
+                  className="w-[60px] pl-3 pr-4 py-2 bg-white text-dark-primary text-sm leading-5 -tracking-[.01em]"
+                />
+              </div>
+              <span>of {totalPages}</span>
             </div>
-            <div className="flex gap-2">
-              <button
-                className="px-3 py-1 border rounded-md disabled:opacity-50"
-                disabled
+            <div className="relative w-[110px]">
+              <select
+                className="w-full appearance-none bg-white border border-gray-light text-dark-primary rounded-md px-3 pr-10 h-9 text-sm leading-5"
+                value={rowsPerPage}
+                onChange={handleRowsPerPageChange}
               >
-                Previous
+                <option value={5}>5 Rows</option>
+                <option value={10}>10 Rows</option>
+                <option value={20}>20 Rows</option>
+              </select>
+              <ChevronDown
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-primary -tracking-[.01em]"
+                size={20}
+              />
+            </div>
+            <div className="flex text-dark-primary text-sm leading-5 flex items-center -tracking-[.01em] opacity-50">
+              <button
+                className="p-0 rounded-none rounded-l-md border border-gray-light h-9 w-9 flex items-center justify-center -mr-px"
+                onClick={handlePreviousPage}
+                disabled={currentPage === 1}
+              >
+                <ArrowLeft size={11} />
               </button>
               <button
-                className="px-3 py-1 border rounded-md disabled:opacity-50"
-                disabled
+                className="p-0 rounded-none rounded-r-md border border-gray-light h-9 w-9 flex items-center justify-center"
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
               >
-                Next
+                <ArrowRight size={11} />
               </button>
             </div>
           </footer>
